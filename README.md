@@ -19,3 +19,6 @@ You can merge them into your codoforum v3.3.1 or overwrite.
 Go to www.your-domain.com/admin/
 
 		System > Sitemap 
+		
+		
+https://raw.githubusercontent.com/nguoianphu/codoforum-sitemap-generator/master/admin_panel.jpg
