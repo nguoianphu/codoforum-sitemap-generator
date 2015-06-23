@@ -12,7 +12,7 @@ Website: http://www.nguoianphu.com/
 
 ## HOW TO USE
 
-Download the ZIP to gat the admin folder.
+Download the ZIP to get the admin folder.
 
 You can merge them into your codoforum v3.3.1 or overwrite.
 
