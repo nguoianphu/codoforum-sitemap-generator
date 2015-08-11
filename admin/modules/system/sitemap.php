@@ -13,7 +13,7 @@ class sitemap {
     static function run() {
 
 
-        if (isset($_GET['site_url']) && isset($_GET['sitemap']) && CODOF\Access\CSRF::valid($_GET['CSRF_token'])) {
+        if (isset($_GET['site_url']) && isset($_GET['sitemap_url']) && CODOF\Access\CSRF::valid($_GET['CSRF_token'])) {
 		
 			$sitemapObject = new Crawler($_GET['site_url']);
 			$sitemapPath = ABSPATH . 'sitemap.xml';
