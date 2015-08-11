@@ -1,4 +1,4 @@
-﻿ <?php
+<?php
 
 /*
 http://whiteboxcomputing.com/php/crawler/
@@ -76,8 +76,11 @@ class Crawler
             // Ignore link without path specification
             if (!isset($parts['path']) || empty($parts['path'])) continue;
 			
-			// Ignore link without {{ codoforum
+	    // Ignore link with {{ in codoforum
             if (preg_match("/{{/", $parts['path'])) continue;
+            
+             // Ignore link with codoforum attachments
+            if (preg_match("/attachment/", $parts['path'])) continue;
             
             // Ignore other schemes
             if (isset($parts['scheme'])) {
