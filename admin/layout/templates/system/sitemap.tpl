@@ -149,7 +149,7 @@
 				sts.append("<br />");
 				sts.append("> Crawled and Created sitemap.xml<br>");
 
-				step_ping();
+			//	step_ping();
 
 
             });
