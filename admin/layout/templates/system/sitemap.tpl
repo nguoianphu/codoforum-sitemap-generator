@@ -80,22 +80,6 @@
 
 
                     </div>
-                    <!--
-                    <div class="form-group">
-                        <label>Port:</label> 
-                        <input type="text" id="fport"   class="form-control" name="ftpserverport" value="21" style="" maxlength="5">
-
-                    </div>-->
-                  <!--  <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name="username" id="fusername" value="" class="form-control" title="Enter your username">
-
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="fpassword" value="" class="form-control" title="Enter your password">
-
-                    </div> -->
 
                     <div class="form-group">
                         <input type="button" onclick="begin_generate()" name="Login" value="Submit" alt="Login">
@@ -136,9 +120,11 @@
         function step_crawl() {
 
 			var site_url = $('#site_url').val();
+			var sitemap_url = $('#sitemap_url').val();
 			
             jQuery.get('index.php?page=system/sitemap&sitemap=true',{
                 site_url: site_url,
+                sitemap_url: sitemap_url,
                 CSRF_token: '{$token}'
             }, function (data) {
 
@@ -149,54 +135,9 @@
 				sts.append("<br />");
 				sts.append("> Crawled and Created sitemap.xml<br>");
 
-			//	step_ping();
-
-
             });
-
 
         }
 
-
-        function step_ping() {
-
-            var sts = $('#codo_import_status');
-            sts.append("> Pinging sitemap to Google, Bing, Yandex ...<br>");
-			
-			var sitemap_url = $('#sitemap_url').val();
-			
-            sts.append("> Pinging Google ...<br>");
-			
-			google = 'http://google.com/webmasters/sitemaps/ping?sitemap='.concat(sitemap_url);
-			
-            jQuery.get(google , function (data) {
-
-                sts.append(data);
-
-            });
-			
-			bing = 'http://www.bing.com/webmaster/ping.aspx?siteMap='.concat(sitemap_url);
-			
-			sts.append("> Pinging Bing ...<br>");
-			
-            jQuery.get(bing, function (data) {
-
-                sts.append(data);
-
-            });
-			
-			yandex = 'http://ping.blogs.yandex.ru/ping?sitemap='.concat(sitemap_url);
-			
-			sts.append("> Pinging Yandex ...<br>");
-			
-            jQuery.get(yandex, function (data) {
-
-                sts.append(data);
-
-            });
-			
-			sts.append("Done <br />");
-			
-        }
 
     </script>
