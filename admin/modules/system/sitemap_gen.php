@@ -201,6 +201,39 @@ class Crawler
 		echo '<br />';
     }
     
+     /**
+     * Ping sitemap file to search engines, by RolluS (webmaster@reynald-rollet.fr) from:
+     * http://jaspreetchahal.org/php-script-function-to-ping-update-google-bing-yahoo-ask-com-about-sitemap-change/comment-page-1/
+     * http://www.benhallbenhall.com/2013/01/script-automatically-submit-sitemap-google-bing-yahoo-ask-etc/
+     */
+    public function SendSiteMapUpdateIndicationPing($sitemap_url){
+        $urls = array();
+        // below are the SEs that we will be pining
+        $urls[] = "http://www.google.com/webmasters/tools/ping?sitemap=".urlencode($sitemap_url);
+        $urls[] = "http://www.bing.com/webmaster/ping.aspx?siteMap=".urlencode($sitemap_url);
+        $urls[] = "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=YahooDemo&amp;url=".urlencode($sitemap_url);
+        $urls[] = "http://submissions.ask.com/ping?sitemap=".urlencode($sitemap_url);
+
+        foreach ($urls as $url)
+        {
+            $parse = parse_url($url);
+            $parsedUrl=$parse['host'];
+            echo "Pinging $parsedUrl with $sitemap_url\n";
+            $returnCode = $this->myCurl($url);
+            echo "<p>Ping sent to $parsedUrl (return code: $returnCode).</p>";
+            }
+    }
+
+    // cUrl handler to ping the Sitemap submission URLs for Search Engines…
+    private function myCurl($targetUrl){
+        $ch = curl_init($targetUrl);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $httpCode;
+    }
+    
 }
 
 	// $sitemapObject = new Crawler('http://192.168.88.45/codoforum/index.php');
