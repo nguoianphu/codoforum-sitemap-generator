@@ -76,12 +76,12 @@ class Crawler
             // Ignore link without path specification
             if (!isset($parts['path']) || empty($parts['path'])) continue;
 			
-	    // Ignore link with {{ in codoforum
+			// Ignore link with {{ in codoforum
             if (preg_match("/{{/", $parts['path'])) continue;
             
-             // Ignore link with codoforum attachments
+			// Ignore link with codoforum attachments
             if (preg_match("/attachment/", $parts['path'])) continue;
-            
+			
             // Ignore other schemes
             if (isset($parts['scheme'])) {
                 $scheme = strtolower($parts['scheme']);
@@ -200,8 +200,8 @@ class Crawler
 		echo "Created $sitemap\n";
 		echo '<br />';
     }
-    
-     /**
+	
+	/**
      * Ping sitemap file to search engines, by RolluS (webmaster@reynald-rollet.fr) from:
      * http://jaspreetchahal.org/php-script-function-to-ping-update-google-bing-yahoo-ask-com-about-sitemap-change/comment-page-1/
      * http://www.benhallbenhall.com/2013/01/script-automatically-submit-sitemap-google-bing-yahoo-ask-etc/
@@ -209,18 +209,19 @@ class Crawler
     public function SendSiteMapUpdateIndicationPing($sitemap_url){
         $urls = array();
         // below are the SEs that we will be pining
-        $urls[] = "http://www.google.com/webmasters/tools/ping?sitemap=".urlencode($sitemap_url);
+        // $urls[] = "http://www.google.com/webmasters/tools/ping?sitemap=".urlencode($sitemap_url);
+        $urls[] = "http://google.com/webmasters/sitemaps/ping?sitemap=".urlencode($sitemap_url);
         $urls[] = "http://www.bing.com/webmaster/ping.aspx?siteMap=".urlencode($sitemap_url);
-        $urls[] = "http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=YahooDemo&amp;url=".urlencode($sitemap_url);
-        $urls[] = "http://submissions.ask.com/ping?sitemap=".urlencode($sitemap_url);
+        $urls[] = "http://ping.blogs.yandex.ru/ping?sitemap=".urlencode($sitemap_url);
+        // $urls[] = "http://submissions.ask.com/ping?sitemap=".urlencode($sitemap_url);
 
         foreach ($urls as $url)
         {
             $parse = parse_url($url);
             $parsedUrl=$parse['host'];
-            echo "Pinging $parsedUrl with $sitemap_url\n";
+            echo "Pinging $parsedUrl with $sitemap_url <br />";
             $returnCode = $this->myCurl($url);
-            echo "<p>Ping sent to $parsedUrl (return code: $returnCode).</p>";
+            echo "<p> Ping sent to $parsedUrl (return code: $returnCode).<br /></p>";
             }
     }
 
