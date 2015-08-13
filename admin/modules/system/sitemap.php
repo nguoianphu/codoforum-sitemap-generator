@@ -18,6 +18,7 @@ class sitemap {
 			$sitemapObject = new Crawler($_GET['site_url']);
 			$sitemapPath = ABSPATH . 'sitemap.xml';
 			$sitemapFile = $sitemapObject->createSitemap($sitemapPath);
+			$sitemapPing=  $sitemapObject->SendSiteMapUpdateIndicationPing(RURI.'sitemap.xml');
 
             // session_write_close();
             // ob_end_flush();
